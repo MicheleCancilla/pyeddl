@@ -25,4 +25,6 @@
 template <typename type_, typename... options>
 void net_addons(pybind11::class_<type_, options...> &cl) {
     cl.def("build", (void (Net::*)(class Optimizer*, vector<Loss*>, vector<Metric*>, class CompServ*, bool)) &Net::build, "C++: Net::build(class Optimizer*, vector<Loss*>, vector<Metric*>, class CompServ*, bool) --> void", pybind11::arg("opt"), pybind11::arg("lo"), pybind11::arg("me"), pybind11::arg("cs"), pybind11::arg("initialize") = true, pybind11::keep_alive<1, 2>(), pybind11::keep_alive<1, 3>(), pybind11::keep_alive<1, 4>(), pybind11::keep_alive<1, 5>());
+    cl.def("getParameters", &Net::getParameters, "C++: Net::getParameters() --> vector< vector <Tensor*> >", pybind11::return_value_policy::reference_internal);
+    cl.def("setParameters", &Net::setParameters, "C++: Net::setParameters() --> vector< vector <Tensor*> >", pybind11::arg("parameters"), pybind11::keep_alive<1, 2>());
 }
